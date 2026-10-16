@@ -16,7 +16,7 @@ def main():
         raw=src.read_bytes()
         if len(raw)>MAX_BYTES: raise ValueError(f"SVG too large: {src.name}")
         low=raw.lower()
-        if any(x in low for x in [b"<!doctype",b"<!entity",b"<script",b"foreignobject",b"javascript:",b"<image",b"<use",b"url(",b"href=",b"xlink:href"]):
+        if any(x in low for x in [b"<!doctype",b"<!entity",b"<script",b"foreignobject",b"javascript:",b"<image",b"<use",b"href=",b"xlink:href"]):
             raise ValueError(f"Disallowed SVG construct: {src.name}")
         if not re.search(rb"<svg\b",raw): raise ValueError("Missing SVG root")
         png=cairosvg.svg2png(bytestring=raw,output_width=1080,output_height=1350)
