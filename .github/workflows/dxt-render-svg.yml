@@ -1,10 +1,5 @@
 name: DXT render SVG to PNG
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'incoming/*.svg'
-      - 'scripts/dxt_render_incoming.py'
   workflow_dispatch:
 permissions:
   contents: write
