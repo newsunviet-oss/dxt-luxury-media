@@ -18,6 +18,7 @@ def main():
         low=raw.lower()
         if any(x in low for x in [b"<!doctype",b"<!entity",b"<script",b"foreignobject",b"javascript:",b"<image",b"<use",b"href=",b"xlink:href"]):
             raise ValueError(f"Disallowed SVG construct: {src.name}")
+        if re.search(rb"url\(\s*(?!#[A-Za-z_][A-Za-z0-9_.:-]*\s*\))",low): raise ValueError(f"External or invalid SVG URL: {src.name}")
         if not re.search(rb"<svg\b",raw): raise ValueError("Missing SVG root")
         png=cairosvg.svg2png(bytestring=raw,output_width=1080,output_height=1350)
         if not png.startswith(b"\x89PNG\r\n\x1a\n"): raise ValueError("Not PNG")
