@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'incoming/*.svg'
+      - 'scripts/dxt_render_incoming.py'
   workflow_dispatch:
 permissions:
   contents: write
